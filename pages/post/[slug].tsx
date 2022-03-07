@@ -1,7 +1,7 @@
 import { sanityClient, urlFor } from '../../sanity'
 import Header from '../../components/Header'
 import { GetStaticProps } from 'next'
-import { Post } from '../../typings'
+import { Comment, Post } from '../../typings'
 import PortableText from 'react-portable-text'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { useState } from 'react'
@@ -94,9 +94,9 @@ function Post({ post }: Props) {
           />
         </div>
       </article>
-      <hr className="my-5 mx-auto max-w-lg border border-yellow-500" />
+      <hr className="my-5 mx-auto max-w-lg border border-black" />
       {submitted ? (
-        <div className="my-10 mx-auto flex max-w-2xl flex-col bg-yellow-500 p-10 text-white">
+        <div className="my-10 mx-auto flex max-w-2xl flex-col bg-black p-10 text-white">
           <h3 className="text-3xl font-bold">
             Thank you for submitting your comment!
           </h3>
@@ -107,7 +107,7 @@ function Post({ post }: Props) {
           onSubmit={handleSubmit(onSubmit)}
           className="mx-auto mb-10 flex max-w-2xl flex-col p-5"
         >
-          <h3 className="text-sm text-yellow-500">Enjoyed this article?</h3>
+          <h3 className="text-sm text-black">Enjoyed this article?</h3>
           <h4 className="text-3xl font-bold">Leave a comment below!</h4>
           <hr className="mt-2 py-3" />
 
@@ -122,7 +122,7 @@ function Post({ post }: Props) {
             <span className="text-gray-700">Name</span>
             <input
               {...register('name', { required: true })}
-              className="sahdow form-input mt-1 block w-full rounded border py-2 px-3 outline-none ring-yellow-500 focus:ring"
+              className="sahdow form-input mt-1 block w-full rounded border py-2 px-3 outline-none ring-black focus:ring"
               placeholder="John Appleseed"
               type="text"
             />
@@ -131,7 +131,7 @@ function Post({ post }: Props) {
             <span className="text-gray-700">Email</span>
             <input
               {...register('email', { required: true })}
-              className="sahdow form-input mt-1 block w-full rounded border py-2 px-3 outline-none ring-yellow-500 focus:ring"
+              className="sahdow form-input mt-1 block w-full rounded border py-2 px-3 outline-none ring-black focus:ring"
               placeholder="John Appleseed"
               type="email"
             />
@@ -140,7 +140,7 @@ function Post({ post }: Props) {
             <span className="text-gray-700">Comment</span>
             <textarea
               {...register('comment', { required: true })}
-              className="sahdow form-textarea mt-1 block w-full rounded border py-2 px-3 outline-none ring-yellow-500 focus:ring"
+              className="sahdow form-textarea mt-1 block w-full rounded border py-2 px-3 outline-none ring-black focus:ring"
               placeholder="John Appleseed"
               rows={8}
             />
@@ -162,19 +162,19 @@ function Post({ post }: Props) {
             )}
           </div>
           <input
-            className="focus:shadow-outline cursor-pointer rounded bg-yellow-500 py-2 px-4 font-bold text-white shadow hover:bg-yellow-400 focus:outline-none"
+            className="focus:shadow-outline cursor-pointer rounded bg-black py-2 px-4 font-bold text-white shadow hover:bg-black focus:outline-none"
             type="submit"
           />
         </form>
       )}
 
-      <div className="my-10 mx-auto flex max-w-2xl flex-col p-10 shadow shadow-yellow-500">
+      <div className="my-10 mx-auto flex max-w-2xl flex-col p-10 shadow shadow-black">
         <h3 className="text-4xl">Comments</h3>
         <hr className="pb-2" />
-        {post.comments.map((comment) => (
+        {post.comments.map((comment: Comment) => (
           <div key={comment._id}>
             <p>
-              <span className="text-yellow-500">{comment.name}: </span>
+              <span className="font-bold text-black">{comment.name}: </span>
               {comment.comment}
             </p>
           </div>
@@ -221,10 +221,10 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
             _type == "comment" &&
             post._ref == ^._id &&
             approved == true],
-            description,
-            mainImage,
-            slug,
-            body
+          description,
+          mainImage,
+          slug,
+          body
         
     }`
 
